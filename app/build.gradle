@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.application'
+    id 'com.aliyun.ams.emas-services'
+}
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('test.jks')
+            storePassword '111111'
+            keyAlias 'test'
+            keyPassword '111111'
+        }
+
+    }
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.d.alipushdemo"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'x86'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    implementation 'com.blankj:utilcode:1.30.6'
+
+
+    implementation 'com.aliyun.ams:alicloud-android-push:3.4.0'
+
+    /*辅助通道*/
+    implementation 'com.aliyun.ams:alicloud-android-third-push:3.4.0'
+    //华为依赖
+    implementation 'com.aliyun.ams:alicloud-android-third-push-huawei:3.4.0'
+//小米依赖
+    implementation 'com.aliyun.ams:alicloud-android-third-push-xiaomi:3.4.0'
+//OPPO依赖
+    implementation 'com.aliyun.ams:alicloud-android-third-push-oppo:3.4.0'
+//vivo依赖
+    implementation 'com.aliyun.ams:alicloud-android-third-push-vivo:3.4.0'
+//谷歌依赖
+    implementation 'com.aliyun.ams:alicloud-android-third-push-fcm:3.4.0'
+
+}
